@@ -1,9 +1,7 @@
-"use client";
+// "use client";
 import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
-import logo from '../../assests/37747cc9b410073591a4dda3fb4e066f.png'
-import logo1 from '../../assests/file.svg'
-
+import logo1 from "@/public/logo1.png";
 import {
   Accordion,
   AccordionContent,
@@ -28,6 +26,7 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import { ModeToggle } from "./ModeToggle";
+import Image from "next/image";
 
 interface MenuItem {
   title: string;
@@ -59,11 +58,12 @@ interface Navbar1Props {
   };
 }
 
+
 const Navbar1 = ({
   logo = {
     url: "/",
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
-    alt: "logo",
+    src: "./logo1.png",
+    alt: 'medi store',
     title: "Shadcn",
   },
   menu = [
@@ -72,7 +72,7 @@ const Navbar1 = ({
       title: "About",
       url: "/about"
     },
-   
+
     {
       title: "Contact",
       url: "/contact",
@@ -89,21 +89,16 @@ const Navbar1 = ({
   className,
 }: Navbar1Props) => {
   return (
+    //logo
     <section className={cn("py-4", className)}>
-      <div className="container">
+      <div className=" w-11/12 mx-auto">
+
         {/* Desktop Menu */}
         <nav className="hidden items-center justify-between lg:flex">
           <div className="flex items-center gap-6">
             {/* Logo */}
-            <Link href={logo.url} className="flex items-center gap-2">
-              <img
-                src={logo1}
-                className="max-h-8 dark:invert"
-                alt={logo.alt}
-              />
-              <span className="text-lg font-semibold tracking-tighter">
-                {logo.title}
-              </span>
+            <Link href={logo.url} className="flex items-center">
+              <img src={logo.src} alt={logo.alt} className="h-8 w-auto dark:invert" />
             </Link>
             <div className="flex items-center">
               <NavigationMenu>
@@ -128,13 +123,13 @@ const Navbar1 = ({
         <div className="block lg:hidden">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href={logo.url} className="flex items-center gap-2">
+            <Link href={logo.url} className="flex items-center gap-2">
               <img
                 src={logo.src}
                 className="max-h-8 dark:invert"
                 alt={logo.alt}
               />
-            </a>
+            </Link>
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon">
@@ -144,13 +139,13 @@ const Navbar1 = ({
               <SheetContent className="overflow-y-auto">
                 <SheetHeader>
                   <SheetTitle>
-                    <a href={logo.url} className="flex items-center gap-2">
+                    <Link href={logo.url} className="flex items-center gap-2">
                       <img
                         src={logo.src}
                         className="max-h-8 dark:invert"
                         alt={logo.alt}
                       />
-                    </a>
+                    </Link>
                   </SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-6 p-4">
@@ -163,6 +158,7 @@ const Navbar1 = ({
                   </Accordion>
 
                   <div className="flex flex-col gap-3">
+                    <ModeToggle></ModeToggle>
                     <Button asChild variant="outline">
                       <a href={auth.login.url}>{auth.login.title}</a>
                     </Button>
@@ -175,13 +171,15 @@ const Navbar1 = ({
             </Sheet>
           </div>
         </div>
+
       </div>
     </section>
   );
 };
 
+//middle item
+//pc
 const renderMenuItem = (item: MenuItem) => {
-
   return (
     <NavigationMenuItem key={item.title}>
       <NavigationMenuLink
@@ -193,7 +191,7 @@ const renderMenuItem = (item: MenuItem) => {
     </NavigationMenuItem>
   );
 };
-
+//mobile
 const renderMobileMenuItem = (item: MenuItem) => {
   if (item.items) {
     return (
@@ -202,38 +200,19 @@ const renderMobileMenuItem = (item: MenuItem) => {
           {item.title}
         </AccordionTrigger>
         <AccordionContent className="mt-2">
-          {item.items.map((subItem) => (
-            <SubMenuLink key={subItem.title} item={subItem} />
-          ))}
+        
         </AccordionContent>
       </AccordionItem>
     );
   }
 
   return (
-    <a key={item.title} href={item.url} className="text-md font-semibold">
+    <Link key={item.title} href={item.url} className="text-md font-semibold">
+      
       {item.title}
-    </a>
+    </Link>
   );
 };
 
-const SubMenuLink = ({ item }: { item: MenuItem }) => {
-  return (
-    <a
-      className="flex min-w-80 flex-row gap-4 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-muted hover:text-accent-foreground"
-      href={item.url}
-    >
-      <div className="text-foreground">{item.icon}</div>
-      <div>
-        <div className="text-sm font-semibold">{item.title}</div>
-        {item.description && (
-          <p className="text-sm leading-snug text-muted-foreground">
-            {item.description}
-          </p>
-        )}
-      </div>
-    </a>
-  );
-};
 
 export { Navbar1 };
