@@ -40,16 +40,16 @@ export const medicineService = {
             return { data: null, error: error || "Something went wrong" }
         }
     },
-    // getBlogById: async function(id:string){
-    //     try {
-    //         const res = await fetch(`${API_URL}/api/medicines/${id}`)
-    //         const data = await res.json()
-    //         return {data:data, error:null}
+    getMedicineById: async function(id:string){
+        try {
+            const res = await fetch(`${API_URL}/api/medicines/details/${id}`)
+            const data = await res.json()
+            return {data:data, error:null}
 
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // },
+        } catch (error) {
+            console.log(error);
+        }
+    },
 
 
 }

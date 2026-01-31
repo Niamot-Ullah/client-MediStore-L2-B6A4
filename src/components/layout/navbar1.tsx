@@ -86,7 +86,7 @@ const Navbar1 = ({
     },
     {
       title: "Dashboard",
-      url: "/user-dashboard",
+      url: "/customer-dashboard",
     },
   ],
   auth = {
@@ -123,7 +123,7 @@ const Navbar1 = ({
               {user ? (
                 <>
                   <ModeToggle />
-                  <Link href="/profile" className="relative h-9 w-9 overflow-hidden rounded-full border">
+                  <Link href="/profile"  className="relative h-9 w-9 overflow-hidden rounded-full border">
                     <img
                       src={user?.image ?? "/avatar-placeholder.png"}
                       alt={user?.name ?? "User"}

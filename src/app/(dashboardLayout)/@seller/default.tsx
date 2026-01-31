@@ -1,6 +1,5 @@
 import React from 'react'
 
-export default function UserDefault() {
+export default function sellerDefault() {
   return null
 }
-

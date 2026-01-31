@@ -15,19 +15,20 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar"
 import AdminDashboard from "./@admin/admin-dashboard/page"
-import UserDashboard from "./@user/user-dashboard/page"
+import UserDashboard from "./@customer/customer-dashboard/page"
 import React from "react"
 import { userService } from "@/services/user.service"
 
-export default async function DashboardLayout({admin,user,children}:{
-    children:React.ReactNode,
-    admin:React.ReactNode,
-    user:React.ReactNode,
+export default async function DashboardLayout({ admin, seller, customer, children }: {
+    children: React.ReactNode,
+    admin: React.ReactNode,
+    seller: React.ReactNode,
+    customer: React.ReactNode,
 }) {
     const { data } = await userService.getSession()
-    console.log(data.user.role );
+    console.log(data.user.role);
     const userInfo = {
-        role:data.user.role 
+        role: data.user.role
     }
     return (
         <SidebarProvider>
@@ -54,9 +55,16 @@ export default async function DashboardLayout({admin,user,children}:{
                     </Breadcrumb>
                 </header>
                 <div>
-                    {userInfo.role==='ADMIN' ? admin:user}
+                    {/* {userInfo.role === 'ADMIN' ? admin : customer} */}
                     {/* {children} */}
-                    
+                    {
+                        userInfo.role === 'ADMIN'
+                            ? admin
+                            : userInfo.role === 'SELLER'
+                                ? seller
+                                : customer
+                    }
+
                 </div>
             </SidebarInset>
         </SidebarProvider>
