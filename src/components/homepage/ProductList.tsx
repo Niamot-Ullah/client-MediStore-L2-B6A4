@@ -20,7 +20,7 @@ const ProductList = () => {
   const [medicines, setMedicines] = useState<Medicine[]>([]);
   const [loading, setLoading] = useState(true);
   const [showAll, setShowAll] = useState(false);
-  console.log(medicines);
+  // console.log(medicines);
 
 const API_URL = env.NEXT_PUBLIC_API_URL;
 

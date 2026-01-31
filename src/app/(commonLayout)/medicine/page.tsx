@@ -41,7 +41,7 @@ export default async function Medicine({
         >
           {medicines.map((medicine: any) => (
             <MedicineCard key={medicine.id} medicine={medicine}></MedicineCard>
-            
+
           ))}
         </div>
       )}
