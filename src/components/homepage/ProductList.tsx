@@ -2,12 +2,14 @@
 import { env } from "@/env"
 import React, { useState, useEffect } from 'react';
 import { Plus, Pill, ArrowRight } from 'lucide-react';
+import Link from "next/link";
 
 
 
 interface Medicine {
   id: string;
   name: string;
+  description?: string;
   price: string;
   image: string;
   category: string;
@@ -57,9 +59,9 @@ const API_URL = env.NEXT_PUBLIC_API_URL;
             <p className="text-slate-500 mt-2">Quality assured healthcare products delivered to you.</p>
           </div>
           <div className="hidden md:block">
-            <span className="text-sm font-medium text-blue-600 flex items-center gap-1 cursor-pointer hover:underline">
+            <Link href={`/medicine`} className="text-sm font-medium text-blue-600 flex items-center gap-1 cursor-pointer hover:underline">
               View Pharmacy Catalog <ArrowRight size={16} />
-            </span>
+            </Link>
           </div>
         </div>
 
@@ -78,12 +80,13 @@ const API_URL = env.NEXT_PUBLIC_API_URL;
 
               <div className="space-y-1">
                 <span className="text-[10px] font-bold uppercase tracking-widest text-blue-500">{product.category}</span>
-                <h3 className="font-bold text-slate-800 truncate">{product.name}</h3>
+                <h3 className="font-bold text-xl text-slate-800 truncate">{product.name}</h3>
+                <h6 className=" text-slate-800 truncate">{product?.description}</h6>
                 {/* <p className="text-xs text-slate-500">{product.strength}</p> */}
               </div>
 
               <div className="mt-4 flex items-center justify-between">
-                {/* <span className="text-lg font-bold text-slate-900">${product?.price.toFixed(2)}</span> */}
+                <span className="text-lg font-bold text-slate-900">$ 10</span>
                 <button className="bg-slate-900 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors shadow-sm">
                   <Plus size={20} />
                 </button>
