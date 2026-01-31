@@ -1,22 +1,23 @@
 import { env } from "@/env"
 import { ur } from "zod/v4/locales"
+import { getMedicineParams } from "@/types";
 
 const API_URL = env.API_URL
 
-interface getBlogsParams {
-    isFeatured?: boolean,
-    search?: string
-}
+// interface getMedicineParams {
+//     isFeatured?: boolean,
+//     search?: string
+// }
 interface ServiceOption {
     cache?: RequestCache;
     revalidate?: number;
 }
 
 
-export const blogService = {
-    getBlogPost: async function (params?: getBlogsParams, options?: ServiceOption) {
+export const medicineService = {
+    getAllMedicines: async function (params?: getMedicineParams, options?: ServiceOption) {
         try {
-            const url = new URL(`${API_URL}/posts`)
+            const url = new URL(`${API_URL}/api/medicines`)
 
             if (params) {
                 Object.entries(params).forEach(([key, value]) => {
@@ -25,46 +26,31 @@ export const blogService = {
                     }
                 })
             }
-
             const config: RequestInit = {};
-
             if (options?.cache) {
                 config.cache = options.cache;
             }
-
             if (options?.revalidate) {
                 config.next = { revalidate: options.revalidate };
             }
-
-            const res = await fetch(url.toString(),config)
-
+            const res = await fetch(url.toString(), config)
             const data = await res.json()
             return { data: data, error: null }
         } catch (error) {
-            return { data: null, error: error }
+            return { data: null, error: error || "Something went wrong" }
         }
     },
-    getBlogById: async function(id:string){
-        try {
-            const res = await fetch(`${API_URL}/posts/${id}`)
-            const data = await res.json()
-            return {data:data, error:null}
-            
-        } catch (error) {
-            console.log(error);
-        }
-    },
-    getAllMedicine: async function(){
-        try {
-            const res = await fetch(`${API_URL}/api/medicines`)
-            // console.log(res);
-            const data = await res.json()
-            return {data:data, error:null}
-            
-        } catch (error) {
-            console.log(error);
-        }
-    },
+    // getBlogById: async function(id:string){
+    //     try {
+    //         const res = await fetch(`${API_URL}/api/medicines/${id}`)
+    //         const data = await res.json()
+    //         return {data:data, error:null}
+
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // },
+
 
 }
 

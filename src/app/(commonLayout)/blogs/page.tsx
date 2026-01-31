@@ -20,7 +20,7 @@ export default function BlogPage() {
   const [search, setSearch] = useState("");
 
   return (
-    <main className="bg-[#FAF9F6] min-h-screen font-sans text-slate-900">
+    <main className="bg-[#FAF9F6] dark:invert-0  min-h-screen font-sans text-slate-900">
       {/* Editorial Header */}
       <header className="max-w-7xl mx-auto px-6 pt-24 pb-16 border-b border-slate-200">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
@@ -50,7 +50,7 @@ export default function BlogPage() {
           {BLOGS.filter(b => b.title.toLowerCase().includes(search.toLowerCase())).map((blog, idx) => (
             <article key={blog.id} className={`group flex flex-col ${idx === 0 ? 'md:col-span-2 lg:col-span-2' : ''}`}>
               {/* Image Container */}
-              <div className="relative aspect-[16/10] overflow-hidden mb-6 bg-slate-200">
+              <div className="relative aspect-[16/10]  overflow-hidden mb-6 bg-slate-200">
                 <img 
                   src={blog.image} 
                   alt={blog.title} 

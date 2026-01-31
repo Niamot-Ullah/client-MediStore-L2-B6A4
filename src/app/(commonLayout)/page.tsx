@@ -5,7 +5,7 @@ import HeroBanner from "@/components/homepage/HeroBanner";
 import HowItWorks from "@/components/homepage/HowItWorks";
 import ProductList from "@/components/homepage/ProductList";
 import BlogCard from "@/components/modules/homepage/BlogCard";
-import { blogService } from "@/services/medicine.service";
+
 
 
 // w-full md:w-11/12 mx-auto

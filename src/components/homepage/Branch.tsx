@@ -37,7 +37,7 @@ const Branch = () => {
   const [selectedId, setSelectedId] = useState(1);
 
   return (
-    <section className="py-20 bg-slate-50">
+    <section className="py-20 bg-slate-50 dark:invert">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center mb-12">

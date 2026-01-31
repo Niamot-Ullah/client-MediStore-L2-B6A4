@@ -19,7 +19,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({
     imageUrl,
 }) => {
     return (
-        <section className="relative w-full bg-blue-50 overflow-hidden rounded-2xl">
+        <section className="relative w-full bg-blue-50 dark:invert overflow-hidden rounded-2xl">
             <div className="max-w-7xl mx-auto px-6 py-12 md:py-20 flex flex-col-reverse md:flex-row items-center">
 
                 {/* Text Content */}
@@ -47,7 +47,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({
                 </div>
 
                 {/* Image Container */}
-                <div className="w-full rounded-2xl md:w-1/2 relative h-[300px] md:h-[450px]">
+                <div className="w-full  rounded-2xl md:w-1/2 relative h-[300px] md:h-[450px]">
                     <Image
                         src="/banner.jpg" 
                         alt="Medical Store Hero"

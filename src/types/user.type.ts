@@ -1,13 +1,13 @@
 export interface User {
-  id: string
-  name: string
-  email: string
-  emailVerified?: boolean
-  image?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  role: UserRoles
-  status?: UserStatus
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    role: UserRoles
+    status?: UserStatus
 }
 
 export enum UserRoles {
@@ -18,4 +18,14 @@ export enum UserRoles {
 export enum UserStatus {
     ACTIVE,
     SUSPENDED
+}
+
+// types/index.ts
+export interface getMedicineParams {
+    search?: string;
+    isFeatured?: boolean;
+    page?: number;
+    limit?: number;
+    sortBy?: string;
+    sortOrder?: "asc" | "desc";
 }
