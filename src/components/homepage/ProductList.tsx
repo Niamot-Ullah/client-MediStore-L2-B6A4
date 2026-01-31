@@ -3,6 +3,7 @@ import { env } from "@/env"
 import React, { useState, useEffect } from 'react';
 import { Plus, Pill, ArrowRight } from 'lucide-react';
 import Link from "next/link";
+import MedicineCard from "../medicine/MedicineCard";
 
 
 
@@ -72,6 +73,8 @@ const API_URL = env.NEXT_PUBLIC_API_URL;
               key={product.id} 
               className="group border border-slate-100 rounded-2xl p-4 hover:shadow-xl hover:border-blue-100 transition-all duration-300 bg-white"
             >
+
+
               <div className="relative h-48 w-full mb-4 bg-slate-50 rounded-xl overflow-hidden flex items-center justify-center">
                  {/* Placeholder for Product Image */}
                  <Pill className="text-slate-200 w-20 h-20 group-hover:scale-110 transition-transform duration-500" />
@@ -87,10 +90,13 @@ const API_URL = env.NEXT_PUBLIC_API_URL;
 
               <div className="mt-4 flex items-center justify-between">
                 <span className="text-lg font-bold text-slate-900">$ 10</span>
-                <button className="bg-slate-900 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors shadow-sm">
+                <Link href={`/medicine/${product.id}`} className="bg-slate-900 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors shadow-sm">
                   <Plus size={20} />
-                </button>
+                </Link>
               </div>
+              
+
+
             </div>
           ))}
         </div>
