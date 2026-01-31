@@ -1,7 +1,7 @@
 
 
 import { getBlogs } from "@/actions/blog.action";
-import { blogService } from "@/services/blog.service";
+import { blogService } from "@/services/medicine.service";
 import { userService } from "@/services/user.service";
 
 

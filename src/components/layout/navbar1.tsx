@@ -96,7 +96,7 @@ const Navbar1 = ({
   user,
   className,
 }: Navbar1Props) => {
-  console.log(user?.name);
+  // console.log(user?.name);
   return (
     //logo
     <section className={cn("py-4", className)}>

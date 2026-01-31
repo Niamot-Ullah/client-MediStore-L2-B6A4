@@ -53,7 +53,18 @@ export const blogService = {
         } catch (error) {
             console.log(error);
         }
-    }
+    },
+    getAllMedicine: async function(){
+        try {
+            const res = await fetch(`${API_URL}/api/medicines`)
+            // console.log(res);
+            const data = await res.json()
+            return {data:data, error:null}
+            
+        } catch (error) {
+            console.log(error);
+        }
+    },
 
 }
 

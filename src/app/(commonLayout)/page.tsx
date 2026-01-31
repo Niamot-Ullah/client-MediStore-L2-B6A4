@@ -3,8 +3,9 @@ import Branch from "@/components/homepage/Branch";
 import Footer from "@/components/homepage/Footer";
 import HeroBanner from "@/components/homepage/HeroBanner";
 import HowItWorks from "@/components/homepage/HowItWorks";
+import ProductList from "@/components/homepage/ProductList";
 import BlogCard from "@/components/modules/homepage/BlogCard";
-import { blogService } from "@/services/blog.service";
+import { blogService } from "@/services/medicine.service";
 
 
 // w-full md:w-11/12 mx-auto
@@ -20,9 +21,10 @@ export default async function Home() {
         ctaLink="/medicine"
         imageUrl="../../assests/banner.jpg" 
       />
+      <ProductList></ProductList>
       <HowItWorks></HowItWorks>
       <Branch></Branch>
-      <Footer></Footer>
+      
     </div>
   );
 }
