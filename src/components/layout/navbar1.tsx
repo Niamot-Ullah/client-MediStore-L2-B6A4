@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import logo1 from "@/public/logo1.png";
@@ -27,6 +27,8 @@ import {
 import Link from "next/link";
 import { ModeToggle } from "./ModeToggle";
 import Image from "next/image";
+import { authClient } from "@/lib/auth-client";
+import { User } from "@/types";
 
 interface MenuItem {
   title: string;
@@ -56,8 +58,13 @@ interface Navbar1Props {
       url: string;
     };
   };
+  user?:User
 }
 
+// const session = await authClient.getSession()
+// console.log(session);
+// const user = session?.data?.user;
+// console.log(user);
 
 const Navbar1 = ({
   logo = {
@@ -69,13 +76,13 @@ const Navbar1 = ({
   menu = [
     { title: "Home", url: "/" },
     {
-      title: "About",
-      url: "/about"
+      title: "Medicine",
+      url: "/medicine"
     },
 
     {
-      title: "Contact",
-      url: "/contact",
+      title: "Blogs",
+      url: "/blogs",
     },
     {
       title: "Dashboard",
@@ -86,8 +93,10 @@ const Navbar1 = ({
     login: { title: "Login", url: "/login" },
     signup: { title: "Sign up", url: "/register" },
   },
+  user,
   className,
 }: Navbar1Props) => {
+  console.log(user?.name);
   return (
     //logo
     <section className={cn("py-4", className)}>
@@ -109,13 +118,37 @@ const Navbar1 = ({
             </div>
           </div>
           <div className="flex gap-2">
-            <ModeToggle></ModeToggle>
-            <Button asChild variant="outline" size="sm">
-              <Link href={auth.login.url}>{auth.login.title}</Link>
-            </Button>
-            <Button asChild size="sm">
-              <Link href={auth.signup.url}>{auth.signup.title}</Link>
-            </Button>
+
+            <div className="flex items-center gap-3">
+              {user ? (
+                <>
+                  <ModeToggle />
+                  <Link href="/profile" className="relative h-9 w-9 overflow-hidden rounded-full border">
+                    <img
+                      src={user?.image ?? "/avatar-placeholder.png"}
+                      alt={user?.name ?? "User"}
+                      className="object-cover"
+                    />
+                  </Link>
+                  <Button asChild variant="outline" size="sm">
+                    <Link href='/logout'>Log Out</Link>
+                  </Button>
+
+                </>
+              ) : (
+                <>
+                  <ModeToggle />
+                  <Button asChild variant="outline" size="sm">
+                    <Link href={auth.login.url}>{auth.login.title}</Link>
+                  </Button>
+                  <Button asChild size="sm">
+                    <Link href={auth.signup.url}>{auth.signup.title}</Link>
+                  </Button>
+                </>
+              )}
+            </div>
+
+
           </div>
         </nav>
 
@@ -158,13 +191,38 @@ const Navbar1 = ({
                   </Accordion>
 
                   <div className="flex flex-col gap-3">
-                    <ModeToggle></ModeToggle>
-                    <Button asChild variant="outline">
-                      <a href={auth.login.url}>{auth.login.title}</a>
-                    </Button>
-                    <Button asChild>
-                      <a href={auth.signup.url}>{auth.signup.title}</a>
-                    </Button>
+
+
+                     {user ? (
+                <>
+                  <div className="flex justify-evenly">
+                    <ModeToggle />
+                  <Link href="/profile" className="relative h-9 w-9 overflow-hidden rounded-full border">
+                    <img
+                      src={user?.image ?? "/avatar-placeholder.png"}
+                      alt={user?.name ?? "User"}
+                      className="object-cover"
+                    />
+                  </Link>
+                  </div>
+                  <Button asChild variant="outline" size="sm">
+                    <Link href='/logout'>Log Out</Link>
+                  </Button>
+
+                </>
+              ) : (
+                <>
+                  <ModeToggle />
+                  <Button asChild variant="outline" size="sm">
+                    <Link href={auth.login.url}>{auth.login.title}</Link>
+                  </Button>
+                  <Button asChild size="sm">
+                    <Link href={auth.signup.url}>{auth.signup.title}</Link>
+                  </Button>
+                </>
+              )}
+
+
                   </div>
                 </div>
               </SheetContent>
@@ -200,7 +258,7 @@ const renderMobileMenuItem = (item: MenuItem) => {
           {item.title}
         </AccordionTrigger>
         <AccordionContent className="mt-2">
-        
+
         </AccordionContent>
       </AccordionItem>
     );
@@ -208,7 +266,7 @@ const renderMobileMenuItem = (item: MenuItem) => {
 
   return (
     <Link key={item.title} href={item.url} className="text-md font-semibold">
-      
+
       {item.title}
     </Link>
   );
