@@ -17,8 +17,8 @@ export default async function Medicine({
     {
       search: filters.search,
       isFeatured: filters.isFeatured,
-      page: filters.page || '1',
-      limit: filters.limit || '8',
+      page: filters?.page || '1',
+      limit: filters?.limit || '8',
       sortBy: filters.sortBy || 'createdAt',
       sortOrder: filters.sortOrder || 'desc',
     },

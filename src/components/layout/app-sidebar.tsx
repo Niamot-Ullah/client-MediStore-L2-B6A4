@@ -16,8 +16,10 @@ import {
 } from "@/components/ui/sidebar"
 import Link from "next/link"
 import { adminRoutes } from "@/routes/adminRoute"
-import { userRoutes } from "@/routes/userRoute"
 import { Route } from "@/types"
+import { Roles } from "@/constants/roles"
+import { sellerRoutes } from "@/routes/sellerRoute"
+import { customerRoutes } from "@/routes/customerRoute"
 
 // This is sample data.
 const data = {
@@ -45,15 +47,18 @@ const data = {
 export function AppSidebar({ user, ...props }: { user: { role: string } & React.ComponentProps<typeof Sidebar> }) {
 
   let routes: Route[] = []
-  switch(user.role){
-    case "admin":
+  switch (user.role) {
+    case Roles.admin:
       routes = adminRoutes;
       break;
-    case "user":
-      routes = userRoutes;
+    case Roles.seller:
+      routes = sellerRoutes;
       break;
-      default :
-      routes=[]
+    case Roles.customer:
+      routes = customerRoutes;
+      break;
+    default:
+      routes = []
   }
 
   return (
@@ -63,17 +68,17 @@ export function AppSidebar({ user, ...props }: { user: { role: string } & React.
           versions={data.versions}
           defaultVersion={data.versions[0]}
         />
-        <SearchForm />
+        {/* <SearchForm /> */}
       </SidebarHeader>
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
         {routes.map((item) => (
-          <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+          <SidebarGroup  key={item.title}>
+            <SidebarGroupLabel className=" mb-3">{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {item.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
+                  <SidebarMenuItem className="border" key={item.title}>
                     <SidebarMenuButton asChild >
                       <Link href={item.url}>{item.title}</Link>
                     </SidebarMenuButton>

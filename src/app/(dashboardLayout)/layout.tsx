@@ -15,9 +15,10 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar"
 import AdminDashboard from "./@admin/admin-dashboard/page"
-import UserDashboard from "./@customer/customer-dashboard/page"
+import UserDashboard from "./@customer/dashboard/page"
 import React from "react"
 import { userService } from "@/services/user.service"
+import { Roles } from "@/constants/roles"
 
 export default async function DashboardLayout({ admin, seller, customer, children }: {
     children: React.ReactNode,
@@ -27,12 +28,10 @@ export default async function DashboardLayout({ admin, seller, customer, childre
 }) {
     const { data } = await userService.getSession()
     console.log(data.user.role);
-    const userInfo = {
-        role: data.user.role
-    }
+   
     return (
         <SidebarProvider>
-            <AppSidebar user={userInfo} />
+            <AppSidebar user={data?.user} />
             <SidebarInset>
                 <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
                     <SidebarTrigger className="-ml-1" />
@@ -40,30 +39,11 @@ export default async function DashboardLayout({ admin, seller, customer, childre
                         orientation="vertical"
                         className="mr-2 data-[orientation=vertical]:h-4"
                     />
-                    <Breadcrumb>
-                        <BreadcrumbList>
-                            <BreadcrumbItem className="hidden md:block">
-                                <BreadcrumbLink href="#">
-                                    Building Your Application
-                                </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator className="hidden md:block" />
-                            <BreadcrumbItem>
-                                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                            </BreadcrumbItem>
-                        </BreadcrumbList>
-                    </Breadcrumb>
+                  
                 </header>
                 <div>
-                    {/* {userInfo.role === 'ADMIN' ? admin : customer} */}
-                    {/* {children} */}
-                    {
-                        userInfo.role === 'ADMIN'
-                            ? admin
-                            : userInfo.role === 'SELLER'
-                                ? seller
-                                : customer
-                    }
+                
+                    {(data?.user?.role === Roles.admin) ? admin : (data?.user?.role === Roles.seller) ? seller : (data?.user?.role === Roles.customer) ? customer : null}
 
                 </div>
             </SidebarInset>
