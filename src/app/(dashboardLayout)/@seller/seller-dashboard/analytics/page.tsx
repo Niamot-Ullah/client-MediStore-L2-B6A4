@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ellerAnalytics() {
+export default function SellerAnalytics() {
   return (
     <div>SellerAnalytics</div>
   )
