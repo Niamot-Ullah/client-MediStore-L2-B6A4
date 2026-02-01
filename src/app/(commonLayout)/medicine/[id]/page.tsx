@@ -14,6 +14,7 @@ import { medicineService } from '@/services/medicine.service';
 import { orderService } from '@/services/order.service';
 import BuyButton from '@/components/medicine/BuyButton';
 import Reviews from '@/components/medicine/Reviews';
+import MedicineReview from '@/components/review/MedicineReview';
 
 
 
@@ -82,7 +83,7 @@ export default async function MedicineDetails({ params }: { params: Promise<{ id
 
                             {/* Quantity and CTA */}
                             <div className="flex flex-wrap gap-4 mb-10">
-                                //BUYING BUTTON
+                                
                                 <BuyButton medicineId={medicine.id} />
 
                             </div>
@@ -126,6 +127,8 @@ export default async function MedicineDetails({ params }: { params: Promise<{ id
                 </div>
             </main>
             <Reviews medicine={medicine}></Reviews>
+            <MedicineReview medicineId={medicine.id} medicineName={medicine.name}/>
+
         </div>
         // <div>hello</div>
     );

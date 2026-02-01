@@ -25,7 +25,7 @@ export default async function Medicine({
     <div style={{ padding: "20px" }}>
       <h1>Medicines</h1>
 
-      {/* 🔍 SEARCH UI */}
+
       <MedicineSearch />
 
       {medicines.length === 0 ? (
