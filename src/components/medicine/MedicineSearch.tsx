@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function MedicineSearch() {
   const router = useRouter();
@@ -9,16 +9,20 @@ export default function MedicineSearch() {
 
   const [search, setSearch] = useState(searchParams.get("search") || "");
 
+  // Reset page to 1 when searching
   const onSearch = (e: React.FormEvent) => {
     e.preventDefault();
 
     const params = new URLSearchParams(searchParams.toString());
 
-    if (search) {
-      params.set("search", search);
+    if (search.trim()) {
+      params.set("search", search.trim());
     } else {
       params.delete("search");
     }
+
+    // Reset to page 1 when searching
+    params.set("page", "1");
 
     router.push(`?${params.toString()}`);
   };
