@@ -1,4 +1,5 @@
 
+import LogoutButton from '@/components/modules/authentication/LogoutButton';
 import { userService } from '@/services/user.service';
 import {
   User,
@@ -12,7 +13,7 @@ import {
   CreditCard
 } from 'lucide-react';
 
-const MyProfile = async() => {
+const MyProfile = async () => {
   const session = await userService.getSession()
   const user = session?.data?.user
 
@@ -52,14 +53,17 @@ const MyProfile = async() => {
             </div>
 
             <nav className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-              <button className="w-full flex items-center gap-3 px-6 py-4 text-sm font-medium transition-all text-blue-600 bg-blue-50/50 border-r-4 ">
+              <button className="w-full flex items-center gap-3 px-6 py-4 text-sm font-medium transition-all text-blue-600 bg-blue-50/50 ">
                 <User size={18} />
                 Personal Info
               </button>
-              <button className="w-full flex items-center gap-3 px-6 py-4 text-sm font-medium text-red-500 hover:bg-red-50 transition-all border-t border-slate-50">
-                <LogOut size={18} />
-                Sign Out
-              </button>
+
+
+              <LogoutButton className="w-full cursor-pointer flex items-center gap-3 px-6 py-6 text-sm font-medium text-red-500 hover:bg-red-50 transition-all border-t border-slate-50">  
+                
+              <LogOut className='ml-4' size={18} />
+                Sign Out</LogoutButton>
+
 
             </nav>
           </aside>

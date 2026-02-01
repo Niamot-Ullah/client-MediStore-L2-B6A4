@@ -26,9 +26,11 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import { ModeToggle } from "./ModeToggle";
-import Image from "next/image";
-import { authClient } from "@/lib/auth-client";
+
 import { User } from "@/types";
+
+import LogoutButton from "../modules/authentication/LogoutButton";
+
 
 interface MenuItem {
   title: string;
@@ -58,13 +60,10 @@ interface Navbar1Props {
       url: string;
     };
   };
-  user?:User
+  user?: User
 }
 
-// const session = await authClient.getSession()
-// console.log(session);
-// const user = session?.data?.user;
-// console.log(user);
+
 
 const Navbar1 = ({
   logo = {
@@ -123,16 +122,21 @@ const Navbar1 = ({
               {user ? (
                 <>
                   <ModeToggle />
-                  <Link href="/profile"  className="relative h-9 w-9 overflow-hidden rounded-full border">
+                  <Link href="/profile" className="relative h-9 w-9 overflow-hidden rounded-full border">
                     <img
                       src={user?.image ?? "/avatar-placeholder.png"}
                       alt={user?.name ?? "User"}
                       className="object-cover"
                     />
                   </Link>
-                  <Button asChild variant="outline" size="sm">
-                    <Link href='/logout'>Log Out</Link>
-                  </Button>
+                  <LogoutButton
+                    variant="default"
+                    size="sm"
+                    className="hover:cursor-pointer"
+                  >
+                    Sign out
+                  </LogoutButton>
+
 
                 </>
               ) : (
@@ -193,34 +197,42 @@ const Navbar1 = ({
                   <div className="flex flex-col gap-3">
 
 
-                     {user ? (
-                <>
-                  <div className="flex justify-evenly">
-                    <ModeToggle />
-                  <Link href="/profile" className="relative h-9 w-9 overflow-hidden rounded-full border">
-                    <img
-                      src={user?.image ?? "/avatar-placeholder.png"}
-                      alt={user?.name ?? "User"}
-                      className="object-cover"
-                    />
-                  </Link>
-                  </div>
-                  <Button asChild variant="outline" size="sm">
-                    <Link href='/logout'>Log Out</Link>
-                  </Button>
+                    {user ? (
+                      <>
+                        <div className="flex justify-evenly">
+                          <ModeToggle />
+                          <Link href="/profile" className="relative h-9 w-9 overflow-hidden rounded-full border">
+                            <img
+                              src={user?.image ?? "/avatar-placeholder.png"}
+                              alt={user?.name ?? "User"}
+                              className="object-cover"
+                            />
+                          </Link>
+                        </div>
+                        <div className="w-full text-center hover:cursor-pointer">
+                        <LogoutButton
+                          variant="default"
+                          size="sm"
+                          className="w-full"
+                        >
+                          Sign out
+                        </LogoutButton>
 
-                </>
-              ) : (
-                <>
-                  <ModeToggle />
-                  <Button asChild variant="outline" size="sm">
-                    <Link href={auth.login.url}>{auth.login.title}</Link>
-                  </Button>
-                  <Button asChild size="sm">
-                    <Link href={auth.signup.url}>{auth.signup.title}</Link>
-                  </Button>
-                </>
-              )}
+                        </div>
+
+
+                      </>
+                    ) : (
+                      <>
+                        <ModeToggle />
+                        <Button asChild variant="outline" size="sm">
+                          <Link href={auth.login.url}>{auth.login.title}</Link>
+                        </Button>
+                        <Button asChild size="sm">
+                          <Link href={auth.signup.url}>{auth.signup.title}</Link>
+                        </Button>
+                      </>
+                    )}
 
 
                   </div>
