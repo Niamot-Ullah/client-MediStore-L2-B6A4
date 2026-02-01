@@ -10,7 +10,7 @@ export const customerRoutes : Route[] = [
         },
         {
           title: "My Profile",
-          url: "/dashboard/profile",
+          url: "/profile",
         },
         {
           title: "Home",

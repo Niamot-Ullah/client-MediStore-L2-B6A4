@@ -19,7 +19,7 @@ export const sellerRoutes: Route[] = [
             },
             {
                 title: "My Profile",
-                url: "/seller-dashboard/profile",
+                url: "/profile",
             },
             {
                 title: "Home",
