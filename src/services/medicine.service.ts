@@ -1,5 +1,6 @@
 import { env } from "@/env";
 import { getMedicineParams } from "@/types";
+import { cookies } from "next/headers";
 
 const API_URL = env.API_URL;
 
@@ -67,6 +68,42 @@ export const medicineService = {
                 data: null, 
                 error: error instanceof Error ? error.message : "Something went wrong" 
             };
+        }
+    },
+    getMyPostedMedicine: async function() {
+        try {
+            const cookieStore = await cookies();
+            const res = await fetch(`${API_URL}/api/medicines/my-posted-medicine`,{
+                headers:{
+                    Cookie:cookieStore.toString(),
+                },
+                cache:"no-store",
+                
+            });
+            const data = await res.json();
+            return { data: data, error: null };
+        } catch (error) {
+            console.error( error);
+            return { 
+                data: null, 
+                error: error instanceof Error ? error.message : "Something went wrong" 
+            };
+        }
+    },
+    getSellerOrder: async function () {
+        try {
+            const cookieStore = await cookies();
+            const res = await fetch(`${API_URL}/api/orders/seller`, {
+                headers: {
+                    Cookie: cookieStore.toString(),
+                },
+                cache: "no-store",
+
+            });
+            const data = await res.json();
+            return { data: data, error: null };
+        } catch (error) {
+            return { data: null, error };
         }
     },
 };

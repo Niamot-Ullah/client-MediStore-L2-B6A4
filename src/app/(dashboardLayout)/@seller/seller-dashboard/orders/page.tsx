@@ -1,24 +1,28 @@
-import { medicineService } from "@/services/medicine.service"
+import { medicineService } from '@/services/medicine.service'
 
 interface Order {
   id: string;
-  name: string;
-  image:string;
-  price: number;
-  stock: number;
+  medicineName: string;
+  medicinePrice: string;
+  quantity: string;
+  totalAmount: string;
   status: string;
-  isFeatured: boolean;
+  shippingAddress: string;
   createdAt: string;
+  medicine: {
+    image: string;
+  };
 }
 
-export default async function PostedMedicine() {
-  const data = await medicineService.getMyPostedMedicine()
-  // console.log(data.data.data.result);
-  const orders = data.data.data.result
 
+
+export default async function SellerAnalytics() {
+  const data = await medicineService.getSellerOrder()
+  const orders = data.data.data
+  console.log(orders);
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-semibold mb-6">My Posted Medicine</h1>
+      <h1 className="text-2xl font-semibold mb-6">My Orders</h1>
 
       <div className="overflow-x-auto rounded-xl border">
         <table className="w-full text-sm">
@@ -27,7 +31,7 @@ export default async function PostedMedicine() {
               <th className="p-3">Medicine</th>
               <th className="p-3">Price</th>
               <th className="p-3">Qty</th>
-
+              <th className="p-3">Total</th>
               <th className="p-3">Status</th>
               <th className="p-3">Date</th>
               <th className="p-3 text-center">Action</th>
@@ -39,28 +43,30 @@ export default async function PostedMedicine() {
               <tr key={order.id} className="border-t">
                 <td className="p-3 flex items-center gap-3">
                   <img
-                    src={order?.image}
-                    alt={order?.name}
+                    src={order.medicine.image}
+                    alt={order.medicineName}
                     className="w-10 h-10 rounded-lg object-cover"
                   />
                   <span className="font-medium">
-                    {order?.name}
+                    {order.medicineName}
                   </span>
                 </td>
 
-                <td className="p-3">${order?.price}</td>
-                <td className="p-3">{order?.stock}</td>
-
+                <td className="p-3">${order.medicinePrice}</td>
+                <td className="p-3">{order.quantity}</td>
+                <td className="p-3 font-semibold">
+                  ${order.totalAmount}
+                </td>
 
                 <td className="p-3">
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-medium
-                      ${order.isFeatured === true
+                      ${order.status === "PLACED"
                         ? "bg-blue-100 text-blue-700"
                         : "bg-gray-100 text-gray-600"
                       }`}
                   >
-                    {order.isFeatured ? "Featured" : "Not Featured"}
+                    {order.status}
                   </span>
                 </td>
 

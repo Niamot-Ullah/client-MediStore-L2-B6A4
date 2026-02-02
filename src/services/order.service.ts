@@ -1,6 +1,5 @@
 import { env } from "@/env"
-import { getMedicineParams } from "@/types";
-import { userService } from "./user.service";
+
 
 const API_URL = env.NEXT_PUBLIC_API_URL
 
@@ -61,6 +60,7 @@ export const orderService = {
             return { data: null, error };
         }
     },
+    
 
     createOrder: async function (
         medicineId: string,
@@ -111,7 +111,7 @@ export const orderService = {
             return { data: null, error };
         }
     },
-    
+
 
 
 }
