@@ -1,6 +1,7 @@
+import MedicineForm from "@/components/medicine/MedicineForm";
 
 export default function AddMedicine() {
   return (
-    <div>AddMedicine</div>
+    <div><MedicineForm></MedicineForm></div>
   )
 }

@@ -9,45 +9,59 @@ interface ServiceOption {
     cache?: RequestCache;
     revalidate?: number;
 }
-// const session = await userService.getSession()
-// console.log(session);
+
 
 export const orderService = {
-    getAllOrders: async function (params?: getMedicineParams, options?: ServiceOption) {
-        try {
-            const url = new URL(`${API_URL}/api/orders`)
+    // getAllOrders: async function (params?: getMedicineParams, options?: ServiceOption) {
+    //     try {
+    //         const url = new URL(`${API_URL}/api/orders`)
 
-            if (params) {
-                Object.entries(params).forEach(([key, value]) => {
-                    if (value !== undefined && value !== null && value !== "") {
-                        url.searchParams.append(key, value)
-                    }
-                })
+    //         if (params) {
+    //             Object.entries(params).forEach(([key, value]) => {
+    //                 if (value !== undefined && value !== null && value !== "") {
+    //                     url.searchParams.append(key, value)
+    //                 }
+    //             })
+    //         }
+    //         const config: RequestInit = {};
+    //         if (options?.cache) {
+    //             config.cache = options.cache;
+    //         }
+    //         if (options?.revalidate) {
+    //             config.next = { revalidate: options.revalidate };
+    //         }
+    //         const res = await fetch(url.toString(), config)
+    //         const data = await res.json()
+    //         return { data: data, error: null }
+    //     } catch (error) {
+    //         return { data: null, error: error || "Something went wrong" }
+    //     }
+    // },
+    getMyOrder: async function () {
+        try {
+            const res = await fetch(`${API_URL}/api/orders/my`, {
+                method: "GET",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+
+            if (!res.ok) {
+                const err = await res.json();
+                throw new Error(err.message || "Failed to fetch my orders");
             }
-            const config: RequestInit = {};
-            if (options?.cache) {
-                config.cache = options.cache;
-            }
-            if (options?.revalidate) {
-                config.next = { revalidate: options.revalidate };
-            }
-            const res = await fetch(url.toString(), config)
-            const data = await res.json()
-            return { data: data, error: null }
+
+            const data = await res.json();
+            console.log(data);
+            return { data, error: null };
+
         } catch (error) {
-            return { data: null, error: error || "Something went wrong" }
+            return { data: null, error };
         }
     },
-    getOrderById: async function (id: string) {
-        try {
-            const res = await fetch(`${API_URL}/api/orders/${id}`)
-            const data = await res.json()
-            return { data: data, error: null }
 
-        } catch (error) {
-            console.log(error);
-        }
-    },
     createOrder: async function (
         medicineId: string,
         payload: {
@@ -61,7 +75,7 @@ export const orderService = {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                credentials: "include", 
+                credentials: "include",
                 body: JSON.stringify(payload),
             });
             if (!res.ok) {
@@ -76,6 +90,28 @@ export const orderService = {
             return { data: null, error }
         }
     },
+    cancelOrder: async function (orderId: string) {
+        try {
+            const res = await fetch(`${API_URL}/api/orders/${orderId}/cancel`, {
+                method: "PATCH",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (!res.ok) {
+                const err = await res.json();
+                throw new Error(err.message || "Failed to cancel order");
+            }
+
+            const data = await res.json();
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    },
+    
 
 
 }
