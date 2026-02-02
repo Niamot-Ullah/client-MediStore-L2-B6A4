@@ -36,7 +36,7 @@ export const medicineService = {
             }
 
             const res = await fetch(url.toString(), config);
-            
+
             if (!res.ok) {
                 throw new Error(`HTTP error! status: ${res.status}`);
             }
@@ -45,17 +45,17 @@ export const medicineService = {
             return { data: data, error: null };
         } catch (error) {
             console.error('Error in getAllMedicines:', error);
-            return { 
-                data: null, 
-                error: error instanceof Error ? error.message : "Something went wrong" 
+            return {
+                data: null,
+                error: error instanceof Error ? error.message : "Something went wrong"
             };
         }
     },
 
-    getMedicineById: async function(id: string) {
+    getMedicineById: async function (id: string) {
         try {
             const res = await fetch(`${API_URL}/api/medicines/details/${id}`);
-            
+
             if (!res.ok) {
                 throw new Error(`HTTP error! status: ${res.status}`);
             }
@@ -64,29 +64,55 @@ export const medicineService = {
             return { data: data, error: null };
         } catch (error) {
             console.error('Error in getMedicineById:', error);
-            return { 
-                data: null, 
-                error: error instanceof Error ? error.message : "Something went wrong" 
+            return {
+                data: null,
+                error: error instanceof Error ? error.message : "Something went wrong"
             };
         }
     },
-    getMyPostedMedicine: async function() {
+    deleteMedicine: async function (id: string) {
         try {
             const cookieStore = await cookies();
-            const res = await fetch(`${API_URL}/api/medicines/my-posted-medicine`,{
-                headers:{
-                    Cookie:cookieStore.toString(),
+            const res = await fetch(`${API_URL}/api/medicines/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Cookie: cookieStore.toString(),
                 },
-                cache:"no-store",
-                
+                cache: "no-store",
+            });
+
+            if (!res.ok) {
+                const err = await res.json();
+                throw new Error(err.message || "Failed to delete medicine");
+            }
+
+            const data = await res.json();
+            return { data: data, error: null };
+        } catch (error) {
+            console.error(error);
+            return {
+                data: null,
+                error: error instanceof Error ? error.message : "Something went wrong"
+            };
+        }
+    },
+    getMyPostedMedicine: async function () {
+        try {
+            const cookieStore = await cookies();
+            const res = await fetch(`${API_URL}/api/medicines/my-posted-medicine`, {
+                headers: {
+                    Cookie: cookieStore.toString(),
+                },
+                cache: "no-store",
+
             });
             const data = await res.json();
             return { data: data, error: null };
         } catch (error) {
-            console.error( error);
-            return { 
-                data: null, 
-                error: error instanceof Error ? error.message : "Something went wrong" 
+            console.error(error);
+            return {
+                data: null,
+                error: error instanceof Error ? error.message : "Something went wrong"
             };
         }
     },

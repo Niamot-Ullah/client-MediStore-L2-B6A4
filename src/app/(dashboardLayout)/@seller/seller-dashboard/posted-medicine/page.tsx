@@ -1,4 +1,7 @@
+import DeleteMedicineButton from "@/components/medicine/DeleteMedicineButton";
 import { medicineService } from "@/services/medicine.service"
+import { Trash, Upload } from "lucide-react";
+
 
 interface Order {
   id: string;
@@ -13,7 +16,6 @@ interface Order {
 
 export default async function PostedMedicine() {
   const data = await medicineService.getMyPostedMedicine()
-  // console.log(data.data.data.result);
   const orders = data.data.data.result
 
   return (
@@ -67,54 +69,20 @@ export default async function PostedMedicine() {
                 <td className="p-3 text-gray-500">
                   {new Date(order.createdAt).toLocaleDateString()}
                 </td>
-
-                {/* <td className="p-3 text-center">
-                  {order.status === "PLACED" && (
-                    <button
-                      onClick={() => {
-                        setSelectedOrder(order);
-                        setOpen(true);
-                      }}
-                      className="text-red-500 hover:text-red-700 transition"
-                      title="Cancel order"
-                    >
-                      <Trash size={18} />
-                    </button>
-                  )}
-                </td> */}
+                <td className="text-red-500 flex gap-4 cursor-pointer">
+                  <Upload className="cursor-pointer hover:text-red-700 "  size={22}/>
+                   <DeleteMedicineButton
+                    id={order.id}
+                    name={order.name}
+                  />
+               
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      {/* <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Cancel Order</DialogTitle>
-            <DialogDescription>
-              Are you sure you want to cancel{" "}
-              <b>{selectedOrder?.medicineName}</b>?
-              This action cannot be undone.
-            </DialogDescription>
-          </DialogHeader>
-
-          <DialogFooter>
-            <Button
-              variant="outline"
-              onClick={() => setOpen(false)}
-            >
-              No, keep it
-            </Button>
-
-            <Button
-              variant="destructive"
-              onClick={confirmCancelOrder}
-            >
-              Yes, cancel order
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog> */}
+      
     </div>
   )
 }
