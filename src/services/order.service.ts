@@ -11,31 +11,7 @@ interface ServiceOption {
 
 
 export const orderService = {
-    // getAllOrders: async function (params?: getMedicineParams, options?: ServiceOption) {
-    //     try {
-    //         const url = new URL(`${API_URL}/api/orders`)
-
-    //         if (params) {
-    //             Object.entries(params).forEach(([key, value]) => {
-    //                 if (value !== undefined && value !== null && value !== "") {
-    //                     url.searchParams.append(key, value)
-    //                 }
-    //             })
-    //         }
-    //         const config: RequestInit = {};
-    //         if (options?.cache) {
-    //             config.cache = options.cache;
-    //         }
-    //         if (options?.revalidate) {
-    //             config.next = { revalidate: options.revalidate };
-    //         }
-    //         const res = await fetch(url.toString(), config)
-    //         const data = await res.json()
-    //         return { data: data, error: null }
-    //     } catch (error) {
-    //         return { data: null, error: error || "Something went wrong" }
-    //     }
-    // },
+    
     getMyOrder: async function () {
         try {
             const res = await fetch(`${API_URL}/api/orders/my`, {

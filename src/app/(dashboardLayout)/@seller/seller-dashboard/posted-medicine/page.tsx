@@ -70,7 +70,7 @@ export default async function PostedMedicine() {
                   {new Date(order.createdAt).toLocaleDateString()}
                 </td>
                 <td className="text-red-500 flex gap-4 cursor-pointer">
-                  <Upload className="cursor-pointer hover:text-red-700 "  size={22}/>
+                  
                    <DeleteMedicineButton
                     id={order.id}
                     name={order.name}
