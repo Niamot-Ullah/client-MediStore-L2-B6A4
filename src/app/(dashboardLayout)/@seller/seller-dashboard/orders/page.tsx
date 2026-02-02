@@ -1,3 +1,4 @@
+import OrderStatusSelect from '@/components/seller/OrderStatusSelect';
 import { medicineService } from '@/services/medicine.service'
 
 interface Order {
@@ -32,14 +33,13 @@ export default async function SellerAnalytics() {
               <th className="p-3">Price</th>
               <th className="p-3">Qty</th>
               <th className="p-3">Total</th>
-              <th className="p-3">Status</th>
               <th className="p-3">Date</th>
-              <th className="p-3 text-center">Action</th>
+              <th className="p-3">Status</th>
             </tr>
           </thead>
 
           <tbody>
-            {orders.map((order:Order) => (
+            {orders.map((order: Order) => (
               <tr key={order.id} className="border-t">
                 <td className="p-3 flex items-center gap-3">
                   <img
@@ -58,69 +58,25 @@ export default async function SellerAnalytics() {
                   ${order.totalAmount}
                 </td>
 
-                <td className="p-3">
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-medium
-                      ${order.status === "PLACED"
-                        ? "bg-blue-100 text-blue-700"
-                        : "bg-gray-100 text-gray-600"
-                      }`}
-                  >
-                    {order.status}
-                  </span>
-                </td>
+
+
 
                 <td className="p-3 text-gray-500">
                   {new Date(order.createdAt).toLocaleDateString()}
                 </td>
+                <td className="p-3">
+                  <OrderStatusSelect
+                    orderId={order.id}
+                    currentStatus={order.status}
+                  />
+                </td>
 
-                {/* <td className="p-3 text-center">
-                  {order.status === "PLACED" && (
-                    <button
-                      onClick={() => {
-                        setSelectedOrder(order);
-                        setOpen(true);
-                      }}
-                      className="text-red-500 hover:text-red-700 transition"
-                      title="Cancel order"
-                    >
-                      <Trash size={18} />
-                    </button>
-                  )}
-                </td> */}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      {/* <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Cancel Order</DialogTitle>
-            <DialogDescription>
-              Are you sure you want to cancel{" "}
-              <b>{selectedOrder?.medicineName}</b>?
-              This action cannot be undone.
-            </DialogDescription>
-          </DialogHeader>
 
-          <DialogFooter>
-            <Button
-              variant="outline"
-              onClick={() => setOpen(false)}
-            >
-              No, keep it
-            </Button>
-
-            <Button
-              variant="destructive"
-              onClick={confirmCancelOrder}
-            >
-              Yes, cancel order
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog> */}
     </div>
   )
 }
