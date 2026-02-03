@@ -86,7 +86,7 @@ const MedicineCard = ({ medicine }: { medicine: MedicineProps }) => {
                                 <ShoppingCart size={20} />
                             </button>
                         ) : (
-                            <Link href={`/medicine/${medicine.id}`}>
+                            <Link href={`/shop/${medicine.id}`}>
                                 <button
                                     className="flex items-center hover:cursor-pointer justify-center w-12 h-12 rounded-2xl bg-blue-600 text-white  transition-all shadow-md hover:bg-slate-900 shadow-blue-100 active:scale-90"
                                 >

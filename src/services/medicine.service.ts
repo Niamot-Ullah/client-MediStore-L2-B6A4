@@ -51,6 +51,25 @@ export const medicineService = {
             };
         }
     },
+    getAllMedicinesForAdmin: async function (params?: getMedicineParams, options?: ServiceOption) {
+        try {
+
+            const res = await fetch(`${API_URL}/api/medicines/admin`);
+        
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+
+            const data = await res.json();
+            return { data: data, error: null };
+        } catch (error) {
+            console.error('Error in getAllMedicines:', error);
+            return {
+                data: null,
+                error: error instanceof Error ? error.message : "Something went wrong"
+            };
+        }
+    },
 
     getMedicineById: async function (id: string) {
         try {
@@ -132,4 +151,37 @@ export const medicineService = {
             return { data: null, error };
         }
     },
+    getAllOrder: async function () {
+        try {
+            const cookieStore = await cookies();
+            const res = await fetch(`${API_URL}/api/orders`, {
+                headers: {
+                    Cookie: cookieStore.toString(),
+                },
+                cache: "no-store",
+
+            });
+            const data = await res.json();
+            return { data: data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    },
+    getAllUser: async function () {
+        try {
+            const cookieStore = await cookies();
+            const res = await fetch(`${API_URL}/api/users`, {
+                headers: {
+                    Cookie: cookieStore.toString(),
+                },
+                cache: "no-store",
+
+            });
+            const data = await res.json();
+            return { data: data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    },
+
 };
