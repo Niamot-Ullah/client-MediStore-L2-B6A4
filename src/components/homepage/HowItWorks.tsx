@@ -51,7 +51,7 @@ const HowItWorks = () => {
 
                 {/* Steps Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {steps.map((step, index) => (
+                    {steps?.map((step, index) => (
                         <div key={step.id} className="relative group">
                             {/* Connection Line (Desktop only) */}
                             {index !== steps.length - 1 && (
@@ -82,7 +82,7 @@ const HowItWorks = () => {
 
                 {/* Call to Action */}
                 <div className="mt-16 text-center">
-                    <Link href={`/medicine`} className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-full transition-all shadow-lg hover:shadow-blue-200">
+                    <Link href={`/shop`} className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-full transition-all shadow-lg hover:shadow-blue-200">
                         Start Your First Order
                     </Link>
                 </div>

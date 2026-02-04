@@ -46,7 +46,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       const toastId = toast.loading("Creating User...")
       try {
         const { data, error } = await authClient.signUp.email(value)
-        console.log(data);
+        // console.log(data);
         if (error) {
           toast.error(error.message, { id: toastId })
           return

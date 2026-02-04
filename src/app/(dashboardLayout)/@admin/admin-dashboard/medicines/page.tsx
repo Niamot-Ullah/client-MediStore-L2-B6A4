@@ -5,8 +5,8 @@ import { medicineService } from "@/services/medicine.service"
 
 export default async function AdminMedicines() {
   const data = await medicineService.getAllMedicinesForAdmin()
-  console.log(data);
-  const medicines = data.data.data
+  // console.log(data);
+  const medicines = data?.data.data
 
   return (
     <div className="p-8 bg-slate-50 min-h-screen">

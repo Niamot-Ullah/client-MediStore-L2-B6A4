@@ -29,7 +29,7 @@ export const orderService = {
             }
 
             const data = await res.json();
-            console.log(data);
+            // console.log(data);
             return { data, error: null };
 
         } catch (error) {

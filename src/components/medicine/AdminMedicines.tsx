@@ -24,7 +24,7 @@ export default async function AdminMedicinesTable({ medicines }: { medicines: an
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-50">
-                        {medicines.map((item) => (
+                        {medicines?.map((item) => (
                             <tr key={item.id} className="hover:bg-blue-50/30 transition-colors group">
                                 {/* Medicine Info */}
                                 <td className="px-6 py-4">

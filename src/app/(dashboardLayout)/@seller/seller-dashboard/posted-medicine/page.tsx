@@ -16,7 +16,7 @@ interface Order {
 
 export default async function PostedMedicine() {
   const data = await medicineService.getMyPostedMedicine()
-  const orders = data.data.data.result
+  const orders = data?.data.data.result
 
   return (
     <div className="p-6">
@@ -37,7 +37,7 @@ export default async function PostedMedicine() {
           </thead>
 
           <tbody>
-            {orders.map((order:Order) => (
+            {orders?.map((order:Order) => (
               <tr key={order.id} className="border-t">
                 <td className="p-3 flex items-center gap-3">
                   <img

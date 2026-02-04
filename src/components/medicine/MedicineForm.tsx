@@ -154,7 +154,7 @@ const MedicineForm = () => {
                         className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-50 focus:border-blue-500 transition-all outline-none appearance-none cursor-pointer"
                     >
                         <option value="">Select category</option>
-                        {categories.map((cat) => (
+                        {categories?.map((cat) => (
                             <option key={cat.id} value={cat.id}>
                                 {cat.name}
                             </option>

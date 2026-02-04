@@ -46,7 +46,7 @@ export default function OrderStatusSelect({
             disabled={isPending}
             className="px-3 py-1 rounded-lg border bg-white text-sm font-medium disabled:opacity-60"
         >
-            {STATUSES.map((status) => (
+            {STATUSES?.map((status) => (
                 <option key={status} value={status}>
                     {status}
                 </option>

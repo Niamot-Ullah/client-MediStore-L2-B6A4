@@ -19,8 +19,8 @@ interface Order {
 
 export default async function SellerAnalytics() {
   const data = await medicineService.getSellerOrder()
-  const orders = data.data.data
-  console.log(orders);
+  const orders = data?.data.data
+  // console.log(orders);
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold mb-6">My Orders</h1>
@@ -39,7 +39,7 @@ export default async function SellerAnalytics() {
           </thead>
 
           <tbody>
-            {orders.map((order: Order) => (
+            {orders?.map((order: Order) => (
               <tr key={order.id} className="border-t">
                 <td className="p-3 flex items-center gap-3">
                   <img

@@ -24,7 +24,7 @@ export default async function AdminOrdersTable({ medicines }: { medicines: any[]
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-50">
-                        {medicines.map((order) => (
+                        {medicines?.map((order) => (
                             <tr key={order.id} className="hover:bg-slate-50/80 transition-colors">
 
                                 {/* Medicine & ID */}

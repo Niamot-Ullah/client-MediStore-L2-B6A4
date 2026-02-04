@@ -1,21 +1,13 @@
+export const dynamic = 'force-dynamic';
 
 import { AppSidebar } from "@/components/layout/app-sidebar"
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+
 import { Separator } from "@/components/ui/separator"
 import {
     SidebarInset,
     SidebarProvider,
     SidebarTrigger,
 } from "@/components/ui/sidebar"
-import AdminDashboard from "./@admin/admin-dashboard/page"
-import UserDashboard from "./@customer/dashboard/page"
 import React from "react"
 import { userService } from "@/services/user.service"
 import { Roles } from "@/constants/roles"
@@ -27,7 +19,7 @@ export default async function DashboardLayout({ admin, seller, customer, childre
     customer: React.ReactNode,
 }) {
     const { data } = await userService.getSession()
-    console.log(data.user.role);
+    // console.log(data.user.role);
    
     return (
         <SidebarProvider>

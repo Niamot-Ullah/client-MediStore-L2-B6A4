@@ -31,7 +31,7 @@ export default async function Categories() {
           </thead>
 
           <tbody>
-            {data.data.data.map((cat: Cat) => (
+            {data?.data.data.map((cat: Cat) => (
               <tr key={cat.id} className="border-t">
                 <td className="p-3 flex items-center gap-3">
                   <span className="font-medium">

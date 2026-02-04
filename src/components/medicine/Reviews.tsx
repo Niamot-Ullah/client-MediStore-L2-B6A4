@@ -28,7 +28,7 @@ const Reviews = ({ medicine }: Props) => {
 
         <div className="lg:col-span-8 space-y-8">
           {/* Individual Reviews */}
-          {reviews.map((review: Review) => {
+          {reviews?.map((review: Review) => {
             const initials =
               review.customer.name?.charAt(0).toUpperCase() ?? "?";
 

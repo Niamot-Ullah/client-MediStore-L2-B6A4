@@ -17,8 +17,8 @@ export default async function Medicine({
     {
       search: filters.search,
       isFeatured: filters.isFeatured,
-      page: filters?.page || '1',
-      limit: filters?.limit || '8',
+      page: filters?.page || 1,
+      limit: filters?.limit || 8,
       sortBy: filters.sortBy || 'createdAt',
       sortOrder: filters.sortOrder || 'desc',
     },
@@ -43,7 +43,7 @@ export default async function Medicine({
   const limit = Number(filters.limit) || 8;
   const page = Number(filters.page) || 1;
 
-  // Calculate totalPages on frontend as fallback
+
   const total = apiPagination?.total || 0;
   const totalPages = apiPagination?.totalPages || Math.ceil(total / limit);
 
@@ -65,7 +65,7 @@ export default async function Medicine({
       ) : (
         <>
           <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-5 mt-5">
-            {medicines.map((medicine: any) => (
+            {medicines?.map((medicine: any) => (
               <MedicineCard key={medicine.id} medicine={medicine} />
             ))}
           </div>

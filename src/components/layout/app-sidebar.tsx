@@ -47,7 +47,7 @@ const data = {
 export function AppSidebar({ user, ...props }: { user: { role: string } & React.ComponentProps<typeof Sidebar> }) {
 
   let routes: Route[] = []
-  switch (user.role) {
+  switch (user?.role) {
     case Roles.admin:
       routes = adminRoutes;
       break;
@@ -72,7 +72,7 @@ export function AppSidebar({ user, ...props }: { user: { role: string } & React.
       </SidebarHeader>
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
-        {routes.map((item) => (
+        {routes?.map((item) => (
           <SidebarGroup  key={item.title}>
             <SidebarGroupLabel className=" mb-3">{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>

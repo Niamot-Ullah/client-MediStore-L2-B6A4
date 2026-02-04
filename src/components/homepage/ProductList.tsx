@@ -60,7 +60,7 @@ const API_URL = env.NEXT_PUBLIC_API_URL;
             <p className="text-slate-500 mt-2">Quality assured healthcare products delivered to you.</p>
           </div>
           <div className="hidden md:block">
-            <Link href={`/medicine`} className="text-sm font-medium text-blue-600 flex items-center gap-1 cursor-pointer hover:underline">
+            <Link href={`/shop`} className="text-sm font-medium text-blue-600 flex items-center gap-1 cursor-pointer hover:underline">
               View Pharmacy Catalog <ArrowRight size={16} />
             </Link>
           </div>
@@ -68,7 +68,7 @@ const API_URL = env.NEXT_PUBLIC_API_URL;
 
         {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {visibleProducts.map((product) => (
+          {visibleProducts?.map((product) => (
             <div 
               key={product.id} 
               className="group border border-slate-100 rounded-2xl p-4 hover:shadow-xl hover:border-blue-100 transition-all duration-300 bg-white"
@@ -90,7 +90,7 @@ const API_URL = env.NEXT_PUBLIC_API_URL;
 
               <div className="mt-4 flex items-center justify-between">
                 <span className="text-lg font-bold text-slate-900">$ 10</span>
-                <Link href={`/medicine/${product.id}`} className="bg-slate-900 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors shadow-sm">
+                <Link href={`/shop/${product.id}`} className="bg-slate-900 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors shadow-sm">
                   <Plus size={20} />
                 </Link>
               </div>

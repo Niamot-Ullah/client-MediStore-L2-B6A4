@@ -49,7 +49,7 @@ const Branch = () => {
           
           {/* Branch Selection List */}
           <div className="lg:col-span-5 space-y-4">
-            {branches.map((branch) => (
+            {branches?.map((branch) => (
               <button
                 key={branch.id}
                 onClick={() => setSelectedId(branch.id)}
